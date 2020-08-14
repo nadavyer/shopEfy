@@ -2,7 +2,6 @@ const shoeImage = 'http://localhost:5000/shoe.jpg';
 const shirtImage = 'http://localhost:5000/shirt.jpg';
 const pantsImage = 'http://localhost:5000/pants.jpg';
 
-
 const data = {
   products: [
     {
@@ -13,7 +12,8 @@ const data = {
       brand: 'Nike',
       rating: 4.5,
       numReviews: 10,
-      description: "Nice black Nikes's shoes."
+      description: "Nice black Nikes's shoes.",
+      countInStock: 6
     },
     {
       __id: 2,
@@ -23,7 +23,8 @@ const data = {
       brand: 'Underarmor',
       rating: 4.2,
       numReviews: 6,
-      description: "Fit slim anti sweat shirt."
+      description: "Fit slim anti sweat shirt.",
+      countInStock: 0
     },
     {
       __id: 3,
@@ -33,9 +34,10 @@ const data = {
       brand: 'Nike',
       rating: 3.9,
       numReviews: 5,
-      description: "Best seller sport's pants."
+      description: "Best seller sport's pants.",
+      countInStock: 8
     }
   ]
 }
 
-export default data;
+module.exports = data;
