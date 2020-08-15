@@ -24,7 +24,7 @@ const data = {
       rating: 4.2,
       numReviews: 6,
       description: "Fit slim anti sweat shirt.",
-      countInStock: 0
+      countInStock: 3
     },
     {
       __id: 3,

@@ -1,14 +1,13 @@
 import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
-import {detailsProduct} from '../actions/actions'
+import {detailsProduct} from '../actions/productActions'
 
 const ProductPage = (props) => {
   const [qty, setQty] = useState(1);
   const productDetails = useSelector(state => state.productDetails);
   const dispatch = useDispatch();
   const {product, loading, error} = productDetails;
-  console.log(productDetails);
 
   useEffect(() => {
     dispatch(detailsProduct(props.match.params.id));
@@ -24,7 +23,7 @@ const ProductPage = (props) => {
       <div>
         <div className="back-to-shop">
           <Link to="/">
-            Back to shop
+            Back to the shop
           </Link>
           <div className="details">
             <div className="details-image">

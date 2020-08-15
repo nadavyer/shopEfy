@@ -3,6 +3,7 @@ import './App.css';
 import {BrowserRouter, Link, Route} from 'react-router-dom';
 import HomePage from './Pages/HomePage';
 import ProductPage from './Pages/ProductPage';
+import CartPage from './Pages/CartPage'
 
 const App = () => {
   const openMenu = () => {
@@ -24,7 +25,7 @@ const App = () => {
             <Link to="/"> ShopEfy </Link>
           </div>
           <div className="header-links">
-            <Link to="/">Cart</Link>
+            <Link to="/cart/">Cart</Link>
             <Link to="/">Sign in</Link>
           </div>
         </header>
@@ -46,6 +47,7 @@ const App = () => {
         <main className="main">
           <div className="content">
             <Route path="/products/:id" component={ProductPage}/>
+            <Route path="/cart/:id?" component={CartPage} />
             <Route path="/" exact={true} component={HomePage}/>
           </div>
         </main>
