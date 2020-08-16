@@ -13,6 +13,13 @@ li {
     list-style-type: none;
 }
 
+button {
+    font-size: 1.6rem;
+}
+.full-width {
+    width: 100%;
+}
+
 #root {
     height: 100%;
 }
@@ -226,6 +233,25 @@ a:hover {
 
 .action-button:hover {
     border: 0.1rem #404040 solid;
+}
+
+.button {
+    padding: .1rem;
+    border: 0.1rem #808080 solid;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.button:hover {
+    border: 0.1rem #404040 solid;
+}
+
+.button.primary {
+    background-color: #f0c040;
+}
+
+.button.secondary {
+    background-color: #f0f0f0;
 }
 
 /* Cart Page */

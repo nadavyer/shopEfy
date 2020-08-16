@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {addToCart} from '../actions/cartActions'
+import {addToCart, removeFromCart} from '../actions/cartActions'
 import {Link} from 'react-router-dom'
 
 const CartPage = (props) => {
@@ -9,11 +9,23 @@ const CartPage = (props) => {
   const dispatch = useDispatch();
   const cart = useSelector(state => state.cart);
   const {cartItems} = cart;
+
+  const removeFromCartHandler = (productId) => {
+    console.log(productId);
+    dispatch(removeFromCart(productId));
+  }
+
+  const checkoutHandler = () => {
+    props.history.push('/signin?redirect=shipping');
+  }
+
+
   useEffect((() => {
     if (productId) {
       dispatch(addToCart(productId, qty));
     }
   }), []);
+
 
   return (
     <div className="cart">
@@ -34,7 +46,7 @@ const CartPage = (props) => {
               </div>
               :
               cartItems.map(cartItem =>
-                <li>
+                <li key={cartItem.productId}>
                   <div className="cart-image">
                     <img src={cartItem.image} alt="product"/>
                   </div>
@@ -45,11 +57,14 @@ const CartPage = (props) => {
                       </Link>
                     </div>
                     Qty:
-                    <select>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
+                    <select value={cartItem.qty} onChange={(e) => dispatch(addToCart(cartItem.productId, e.target.value))}>
+                      {[...Array(cartItem.countInStock).keys()].map(qtyOption =>
+                        <option key={qtyOption} value={qtyOption + 1}>{qtyOption + 1}</option>
+                      )}
                     </select>
+                    <button type="button"  className="button" onClick={() => removeFromCartHandler(cartItem.productId)}>
+                      Remove
+                    </button>
                   </div>
                   <div className="cart-price">
                     ${cartItem.price}
@@ -64,7 +79,7 @@ const CartPage = (props) => {
           :
           ${cartItems.reduce((a, b) => a + b.price * b.qty, 0)}
         </h3>
-        <button className="action-button" disabled={cartItems.length === 0}>
+        <button className="action-button full-width" disabled={cartItems.length === 0} onClick={checkoutHandler}>
           Proceed to checkout
         </button>
       </div>
