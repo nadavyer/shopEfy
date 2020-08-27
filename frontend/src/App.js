@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import {BrowserRouter, Link, Route} from 'react-router-dom';
 import HomePage from './Pages/HomePage';
+import SigningPage from './Pages/SigninPage'
 import ProductPage from './Pages/ProductPage';
 import CartPage from './Pages/CartPage'
 
@@ -22,11 +23,11 @@ const App = () => {
             <button className="burger-button" onClick={openMenu}>
               &#9776;
             </button>
-            <Link to="/"> ShopEfy </Link>
+            <Link to="/">Amoazona</Link>
           </div>
           <div className="header-links">
             <Link to="/cart/">Cart</Link>
-            <Link to="/">Sign in</Link>
+            <Link to="/signin">Sign in</Link>
           </div>
         </header>
         <aside className="sidebar">
@@ -46,6 +47,7 @@ const App = () => {
         </aside>
         <main className="main">
           <div className="content">
+            <Route path="/signin" component={SigningPage} />
             <Route path="/products/:id" component={ProductPage}/>
             <Route path="/cart/:id?" component={CartPage} />
             <Route path="/" exact={true} component={HomePage}/>

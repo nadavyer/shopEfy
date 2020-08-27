@@ -1,8 +1,32 @@
-const express = require('express')
+const express = require('express');
+const config = require('./utils/config');
 const data = require('./data');
+const mongoose = require('mongoose');
+const morgan = require('morgan')
+const userRoute = require('./routes/userRoute')
+const User = require('./models/userModel')
+
+
+const mongodbUrl = config.MONGODB_URL
+
+mongoose
+  .connect(mongodbUrl, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
+  .then(() => {
+    console.log('Connected to MongoDB')
+  })
+  .catch((error) =>
+    console.log(`Error connecting mongoDB: ${error}`));
+
 const app = express();
+
+app.use(morgan('tiny'));
 app.use(express.static('public'));
 
+app.use('/api/users', userRoute);
 
 app.get('/api/products/:id', (req, res) => {
   const productId = req.params.id;
@@ -16,7 +40,7 @@ app.get('/api/products', (req, res) => {
 })
 
 
-const port = 5000;
+const port = process.env.PORT;
 app.listen(5000, () => {
-  console.log(`*** Server started at http://localhost:${port} ***`);
+  console.log(`*** Server started on http://localhost:${port} ***`);
 })
