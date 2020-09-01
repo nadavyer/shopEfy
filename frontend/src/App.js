@@ -5,8 +5,13 @@ import HomePage from './Pages/HomePage';
 import SigningPage from './Pages/SigninPage'
 import ProductPage from './Pages/ProductPage';
 import CartPage from './Pages/CartPage'
+import RegisterPage from './Pages/RegisterPage'
+import {useSelector} from 'react-redux'
 
 const App = () => {
+
+  const userSignin = useSelector(state => state.userSignin);
+  const {userInfo} = userSignin;
   const openMenu = () => {
     document.querySelector(".sidebar").classList.add("open");
   }
@@ -27,7 +32,12 @@ const App = () => {
           </div>
           <div className="header-links">
             <Link to="/cart/">Cart</Link>
-            <Link to="/signin">Sign in</Link>
+            {
+              userInfo
+                ? <Link to="/profile">{userInfo.name}</Link>
+                : <Link to="/signin">Sign in</Link>
+            }
+
           </div>
         </header>
         <aside className="sidebar">
@@ -47,9 +57,10 @@ const App = () => {
         </aside>
         <main className="main">
           <div className="content">
-            <Route path="/signin" component={SigningPage} />
+            <Route path="/signin" component={SigningPage}/>
+            <Route path="/register" component={RegisterPage}/>
             <Route path="/products/:id" component={ProductPage}/>
-            <Route path="/cart/:id?" component={CartPage} />
+            <Route path="/cart/:id?" component={CartPage}/>
             <Route path="/" exact={true} component={HomePage}/>
           </div>
         </main>

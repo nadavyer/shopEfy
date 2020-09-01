@@ -3,8 +3,9 @@ const config = require('./utils/config');
 const data = require('./data');
 const mongoose = require('mongoose');
 const morgan = require('morgan')
-const userRoute = require('./routes/userRoute')
-const User = require('./models/userModel')
+const bodyParser = require('body-parser');
+const userRoute = require('./routes/userRoute');
+const User = require('./models/userModel');
 
 
 const mongodbUrl = config.MONGODB_URL
@@ -22,7 +23,7 @@ mongoose
     console.log(`Error connecting mongoDB: ${error}`));
 
 const app = express();
-
+app.use(bodyParser.json());
 app.use(morgan('tiny'));
 app.use(express.static('public'));
 

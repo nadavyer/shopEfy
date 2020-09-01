@@ -1,24 +1,26 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {signin} from '../actions/userActions'
+import {register} from '../actions/userActions'
 
-const SigninPage = (props) => {
+const RegisterPage = (props) => {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const userSignin = useSelector(state => state.userSignin);
-  const {loading, userInfo, error} = userSignin;
+  const [rePassword, setRePassword] = useState('');
+  const userRegister = useSelector(state => state.userRegister);
+  const {loading, userInfo, error} = userRegister;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if(userInfo) {
+    if (userInfo) {
       props.history.push('/');
     }
   }, [userInfo]);
 
   const submitHandler = e => {
     e.preventDefault();
-    dispatch(signin(email, password))
+    dispatch(register(name, email, password))
   }
 
 
@@ -27,37 +29,48 @@ const SigninPage = (props) => {
       <form onSubmit={submitHandler}>
         <ul className="form-container">
           <li>
-            <h2>Sign-in</h2>
+            <h2>Create account</h2>
           </li>
           <li>
             {loading && <div>Loading...</div>}
             {error && <div>{error}</div>}
           </li>
           <li>
-            <label itemType="email">
+            <label htmlFor="name">
+              Name
+            </label>
+            <input type="name" name="name" id="name" onChange={(e) => setName(e.target.value)}>
+            </input>
+          </li>
+          <li>
+            <label htmlFor="email">
               Email
             </label>
             <input type="email" name="email" id="email" onChange={(e) => setEmail(e.target.value)}>
             </input>
           </li>
           <li>
-            <label itemType="password">
+            <label htmlFor="password">
               Password
             </label>
             <input type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)}>
             </input>
           </li>
           <li>
+            <label htmlFor="rePassword">
+              Re-enter password
+            </label>
+            <input type="password" name="password" id="password" onChange={(e) => setRePassword(e.target.value)}>
+            </input>
+          </li>
+          <li>
             <button type="submit" className="action-button">
-              Signin
+              Register
             </button>
           </li>
           <li>
-            New to Amazona?
-          </li>
-          <li>
-            <Link className="button full-width" to={"/register"}>
-              Create your Amazon account
+            <Link to="/signin">
+              Already have an account?
             </Link>
           </li>
         </ul>
@@ -66,4 +79,4 @@ const SigninPage = (props) => {
   )
 }
 
-export default SigninPage;
+export default RegisterPage;

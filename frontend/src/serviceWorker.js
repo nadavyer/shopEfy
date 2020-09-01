@@ -1,5 +1,5 @@
-// This optional code is used to register a service worker.
-// register() is not called by default.
+// This optional code is used to Signin a service worker.
+// Signin() is not called by default.
 
 // This lets the app load faster on subsequent visits in production, and gives
 // it offline capabilities. However, it also means that developers (and users)
@@ -20,7 +20,7 @@ const isLocalhost = Boolean(
     )
 );
 
-export function register(config) {
+export function Signin(config) {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
@@ -47,16 +47,16 @@ export function register(config) {
           );
         });
       } else {
-        // Is not localhost. Just register service worker
-        registerValidSW(swUrl, config);
+        // Is not localhost. Just Signin service worker
+        SigninValidSW(swUrl, config);
       }
     });
   }
 }
 
-function registerValidSW(swUrl, config) {
+function SigninValidSW(swUrl, config) {
   navigator.serviceWorker
-    .register(swUrl)
+    .Signin(swUrl)
     .then(registration => {
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
@@ -112,13 +112,13 @@ function checkValidServiceWorker(swUrl, config) {
       ) {
         // No service worker found. Probably a different app. Reload the page.
         navigator.serviceWorker.ready.then(registration => {
-          registration.unregister().then(() => {
+          registration.unSignin().then(() => {
             window.location.reload();
           });
         });
       } else {
         // Service worker found. Proceed as normal.
-        registerValidSW(swUrl, config);
+        SigninValidSW(swUrl, config);
       }
     })
     .catch(() => {
@@ -128,11 +128,11 @@ function checkValidServiceWorker(swUrl, config) {
     });
 }
 
-export function unregister() {
+export function unSignin() {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.ready
       .then(registration => {
-        registration.unregister();
+        registration.unSignin();
       })
       .catch(error => {
         console.error(error.message);
