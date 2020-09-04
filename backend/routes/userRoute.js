@@ -1,6 +1,6 @@
 const express = require('express');
 const User = require('../models/userModel');
-const getToken = require('../utils/utils');
+const {getToken} = require('../utils/utils');
 
 const router = express.Router();
 
@@ -14,7 +14,7 @@ router.post('/register', async (req, res) => {
 
   if (newUser) {
     res.send({
-      __id: newUser.id,
+      id: newUser.id,
       name: newUser.name,
       email: newUser.email,
       isAdmin: newUser.isAdmin,
@@ -33,7 +33,7 @@ router.post('/signin', async (req, res) => {
 
   if (SigninUser) {
     res.send({
-      __id: SigninUser.id,
+      id: SigninUser.id,
       name: SigninUser.name,
       email: SigninUser.email,
       isAdmin: SigninUser.isAdmin,

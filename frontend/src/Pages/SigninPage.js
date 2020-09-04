@@ -31,7 +31,7 @@ const SigninPage = (props) => {
           </li>
           <li>
             {loading && <div>Loading...</div>}
-            {error && <div>{error}</div>}
+            {error && <div>{error.message}</div>}
           </li>
           <li>
             <label itemType="email">
@@ -56,8 +56,8 @@ const SigninPage = (props) => {
             New to Amazona?
           </li>
           <li>
-            <Link className="button full-width" to={"/register"}>
-              Create your Amazon account
+            <Link className="button secondary text-center" to={"/register"}>
+              Create your Amazona account
             </Link>
           </li>
         </ul>

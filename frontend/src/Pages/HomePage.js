@@ -17,13 +17,13 @@ const HomePage = () => {
       : error ? <div>{error}</div> :
       <ul className="products">
         {products.map(product =>
-          <li key={product.__id}>
+          <li key={product.id}>
             <div className="product">
-              <Link to={`/products/${product.__id}`}>
+              <Link to={`/products/${product.id}`}>
                 <img className="product-image" src={product.image} alt="product"/>
               </Link>
               <div className="product-name">
-                <Link to={`/products/${product.__id}`}>{product.name}</Link>
+                <Link to={`/products/${product.id}`}>{product.name}</Link>
               </div>
               <div className="product-brand">Brand: {product.brand}</div>
               <div className="product-price">Price: ${product.price}</div>

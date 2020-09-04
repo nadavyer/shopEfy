@@ -1,11 +1,10 @@
 const express = require('express');
 const config = require('./utils/config');
-const data = require('./data');
 const mongoose = require('mongoose');
 const morgan = require('morgan')
 const bodyParser = require('body-parser');
 const userRoute = require('./routes/userRoute');
-const User = require('./models/userModel');
+const productRoute = require('./routes/productRoute');
 
 
 const mongodbUrl = config.MONGODB_URL
@@ -28,17 +27,7 @@ app.use(morgan('tiny'));
 app.use(express.static('public'));
 
 app.use('/api/users', userRoute);
-
-app.get('/api/products/:id', (req, res) => {
-  const productId = req.params.id;
-  const product = data.products.find(product => product.__id === Number(productId));
-  product
-    ? res.json(product)
-    : res.status(404).json({message: "Product not found."});
-})
-app.get('/api/products', (req, res) => {
-  res.json(data.products)
-})
+app.use('/api/products', productRoute)
 
 
 const port = process.env.PORT;

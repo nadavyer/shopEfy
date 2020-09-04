@@ -20,7 +20,7 @@ const RegisterPage = (props) => {
 
   const submitHandler = e => {
     e.preventDefault();
-    dispatch(register(name, email, password))
+    dispatch(register(name, email, password, rePassword))
   }
 
 
@@ -69,7 +69,7 @@ const RegisterPage = (props) => {
             </button>
           </li>
           <li>
-            <Link to="/signin">
+            <Link className="button secondary text-center" to="/signin" >
               Already have an account?
             </Link>
           </li>

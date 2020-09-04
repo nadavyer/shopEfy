@@ -11,7 +11,6 @@ const CartPage = (props) => {
   const {cartItems} = cart;
 
   const removeFromCartHandler = (productId) => {
-    console.log(productId);
     dispatch(removeFromCart(productId));
   }
 

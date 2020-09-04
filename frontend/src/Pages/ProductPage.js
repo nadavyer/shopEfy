@@ -14,6 +14,7 @@ const ProductPage = (props) => {
   }, []);
 
   const handleAddToCart = () => {
+    console.log(`/cart/${props.match.params.id}?qty=${qty}`);
     props.history.push(`/cart/${props.match.params.id}?qty=${qty}`)
   }
 

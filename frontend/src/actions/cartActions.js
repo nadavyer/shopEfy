@@ -8,7 +8,7 @@ const addToCart = (productId, qty) => async (dispatch, getState) => {
     dispatch({
       type: CART_ADD_ITEM,
       payload: {
-        productId: data.__id,
+        productId: data.id,
         name: data.name,
         image: data.image,
         price: data.price,
