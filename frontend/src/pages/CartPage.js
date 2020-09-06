@@ -51,7 +51,7 @@ const CartPage = (props) => {
                   </div>
                   <div className="cart-name">
                     <div>
-                      <Link to={`/product/${cartItem.productId}`}>
+                      <Link to={`/products/${cartItem.productId}`}>
                         {cartItem.name}
                       </Link>
                     </div>

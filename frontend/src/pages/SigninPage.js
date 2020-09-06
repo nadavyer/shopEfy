@@ -9,10 +9,14 @@ const SigninPage = (props) => {
   const userSignin = useSelector(state => state.userSignin);
   const {loading, userInfo, error} = userSignin;
   const dispatch = useDispatch();
+  const redirect = props.location.search ? props.location.search.split('=')[1] : '/';
+
+  console.log(redirect);
+  console.log(props.location.search);
 
   useEffect(() => {
     if(userInfo) {
-      props.history.push('/');
+      props.history.push(redirect);
     }
   }, [userInfo]);
 
@@ -56,7 +60,7 @@ const SigninPage = (props) => {
             New to Amazona?
           </li>
           <li>
-            <Link className="button secondary text-center" to={"/register"}>
+            <Link to={redirect === '/' ? 'register' : `register?redirect=${redirect}`} className="button secondary text-center" >
               Create your Amazona account
             </Link>
           </li>

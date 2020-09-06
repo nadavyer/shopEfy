@@ -9,6 +9,14 @@ router.get('/', async (req, res) => {
   res.send(products);
 });
 
+router.get('/:id', async (req, res) => {
+  const productId = req.params.id;
+  const product = await Product.findById(productId);
+  product
+    ? res.json(product)
+    : res.status(404).json({message: "Product not found."});
+});
+
 router.put('/:id', async (req, res) => {
   const productId = req.params.id;
   const productData = req.body;
@@ -42,14 +50,6 @@ router.post('/', async (req, res) => {
   res.status(500).send({message: 'Error creating product'})
 });
 
-
-router.get('/:id', async (req, res) => {
-  const productId = req.params.id;
-  const product = await Product.findById(productId);
-  product
-    ? res.json(product)
-    : res.status(404).json({message: "Product not found."});
-});
 
 router.delete('/:id',isAuth, isAdmin, async (req, res) => {
   const productId = req.params.id;

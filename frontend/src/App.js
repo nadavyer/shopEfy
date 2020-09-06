@@ -1,13 +1,16 @@
 import React from 'react';
 import './App.css';
 import {BrowserRouter, Link, Route, Switch} from 'react-router-dom';
-import HomePage from './Pages/HomePage';
-import SigningPage from './Pages/SigninPage'
-import ProductPage from './Pages/ProductPage';
-import CartPage from './Pages/CartPage'
-import RegisterPage from './Pages/RegisterPage'
-import ProductsPage from './Pages/ProductsPage'
-import {useSelector} from 'react-redux'
+import {useSelector} from 'react-redux';
+import HomePage from './pages/HomePage';
+import SigningPage from './pages/SigninPage'
+import ProductPage from './pages/ProductPage';
+import CartPage from './pages/CartPage';
+import RegisterPage from './pages/RegisterPage';
+import ProductsPage from './pages/ProductsPage';
+import ShippingPage from './pages/ShippingPage';
+import PaymentPage from './pages/PaymentPage'
+import PlaceOrderPage from './pages/PlaceOrderPage';
 
 const App = () => {
 
@@ -64,6 +67,9 @@ const App = () => {
               <Route path="/products/:id" component={ProductPage}/>
               <Route path="/products" component={ProductsPage}/>
               <Route path="/cart/:id?" component={CartPage}/>
+              <Route path="/shipping" component={ShippingPage}/>
+              <Route path="/payment" component={PaymentPage}/>
+              <Route path="/placeorder" component={PlaceOrderPage}/>
               <Route path="/" exact={true} component={HomePage}/>
             </Switch>
           </div>

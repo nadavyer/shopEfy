@@ -9,7 +9,7 @@ import cookie from 'js-cookie';
 
 const cartItems = cookie.getJSON('cartItems') || [];
 const userInfo = cookie.getJSON('userInfo') || null;
-const initialState = {cart: {cartItems}, userSignin: {userInfo}};
+const initialState = {cart: {cartItems: [], shipping: {}, payment: {}}, userSignin: {userInfo}};
 
 const reducer = combineReducers({
   productList: productListReducer,
