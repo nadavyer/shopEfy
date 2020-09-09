@@ -1,8 +1,8 @@
-const express = require('express');
 const Product = require('../models/productModel');
 const {isAuth} = require('../utils/utils');
 const {isAdmin} = require('../utils/utils');
-const router = express.Router();
+const router = require('express').Router();
+
 
 router.get('/', async (req, res) => {
   const products = await Product.find({});
@@ -53,11 +53,15 @@ router.post('/', async (req, res) => {
 
 router.delete('/:id',isAuth, isAdmin, async (req, res) => {
   const productId = req.params.id;
-  console.log(productId);
   const deletedProduct = await Product.findById(productId);
   if (deletedProduct) {
-    await deletedProduct.remove();
-    res.status(200).send({message: 'Product deleted'});
+    try {
+      await deletedProduct.remove();
+      res.status(200).send({message: 'Product deleted'});
+    }
+    catch (e) {
+      res.status(400).send({error: 'Error delete product'});
+    }
   }
   else {
     res.status(400).send({error: 'Error delete product'});

@@ -11,6 +11,7 @@ import ProductsPage from './pages/ProductsPage';
 import ShippingPage from './pages/ShippingPage';
 import PaymentPage from './pages/PaymentPage'
 import PlaceOrderPage from './pages/PlaceOrderPage';
+import OrderPage from './pages/OrderPage'
 
 const App = () => {
 
@@ -70,6 +71,7 @@ const App = () => {
               <Route path="/shipping" component={ShippingPage}/>
               <Route path="/payment" component={PaymentPage}/>
               <Route path="/placeorder" component={PlaceOrderPage}/>
+              <Route path="/orders/:id" component={OrderPage}/>
               <Route path="/" exact={true} component={HomePage}/>
             </Switch>
           </div>

@@ -23,7 +23,7 @@ const CartPage = (props) => {
     if (productId) {
       dispatch(addToCart(productId, qty));
     }
-  }), []);
+  }), [dispatch, productId, qty]);
 
 
   return (
@@ -45,23 +45,23 @@ const CartPage = (props) => {
               </div>
               :
               cartItems.map(cartItem =>
-                <li key={cartItem.productId}>
+                <li key={cartItem.product}>
                   <div className="cart-image">
                     <img src={cartItem.image} alt="product"/>
                   </div>
                   <div className="cart-name">
                     <div>
-                      <Link to={`/products/${cartItem.productId}`}>
+                      <Link to={`/products/${cartItem.product}`}>
                         {cartItem.name}
                       </Link>
                     </div>
                     Qty:
-                    <select value={cartItem.qty} onChange={(e) => dispatch(addToCart(cartItem.productId, e.target.value))}>
+                    <select value={cartItem.qty} onChange={(e) => dispatch(addToCart(cartItem.product, e.target.value))}>
                       {[...Array(cartItem.countInStock).keys()].map(qtyOption =>
                         <option key={qtyOption} value={qtyOption + 1}>{qtyOption + 1}</option>
                       )}
                     </select>
-                    <button type="button"  className="button" onClick={() => removeFromCartHandler(cartItem.productId)}>
+                    <button type="button"  className="button" onClick={() => removeFromCartHandler(cartItem.product)}>
                       Remove
                     </button>
                   </div>

@@ -13,18 +13,20 @@ const getToken = (user) => {
 }
 
 const isAuth = (req, res, next) => {
-  const token = req.headers.authorization;
+  const token = req.get('authorization');
   if (token) {
     const onlyToken = token.slice(7, token.length);
     jwt.verify(onlyToken, config.JWT_SECRET, (error, decode) => {
       if (error) {
-        return res.status(401).send({message: 'Invalid Token'})
+        res.status(401).send({message: 'Invalid Token'})
       }
       req.user = decode;
       next();
     });
   }
-  res.status(401).send({message: 'Token is not supplied'})
+  else {
+    res.status(401).send({message: 'Token is not supplied'})
+  }
 }
 
 const isAdmin = (req, res, next) => {

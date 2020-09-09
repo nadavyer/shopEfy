@@ -4,17 +4,17 @@ const cartReducer = (state = {cartItems: [], shipping: {}, payment: {}}, action)
   switch (action.type) {
     case CART_ADD_ITEM:
       const item = action.payload;
-      const product = state.cartItems.find(itm => itm.productId === item.productId);
+      const product = state.cartItems.find(itm => itm.product === item.product);
       if (product) {
         return {
-          cartItems: state.cartItems.map(cartItm => cartItm.productId === item.productId ? item : cartItm)
+          cartItems: state.cartItems.map(cartItm => cartItm.product === item.product ? item : cartItm)
         }
       }
       return {cartItems: [...state.cartItems, item]}
 
     case CART_REMOVE_ITEM:
       return {
-        cartItems: state.cartItems.filter(item => item.productId !== action.payload)
+        cartItems: state.cartItems.filter(item => item.product !== action.payload)
       }
 
     case CART_SAVE_SHIPPING:

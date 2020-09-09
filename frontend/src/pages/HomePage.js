@@ -10,7 +10,7 @@ const HomePage = () => {
 
   useEffect(() => {
     dispatch(listProducts());
-  }, []);
+  }, [dispatch]);
 
   return (
     loading ? <div>Loading...</div>

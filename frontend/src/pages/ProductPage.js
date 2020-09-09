@@ -11,10 +11,9 @@ const ProductPage = (props) => {
 
   useEffect(() => {
     dispatch(detailsProduct(props.match.params.id));
-  }, []);
+  }, [dispatch, props.match.params.id]);
 
   const handleAddToCart = () => {
-    console.log(`/cart/${props.match.params.id}?qty=${qty}`);
     props.history.push(`/cart/${props.match.params.id}?qty=${qty}`)
   }
 

@@ -2,40 +2,21 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
 import CheckoutSteps from '../components/CheckoutSteps';
-import {createOrder} from '../actions/orderActions'
+import {detailsOrder} from '../actions/orderActions'
 
-
-const PlaceOrderPage = (props) => {
-  const cart = useSelector(state => state.cart);
-  const {cartItems, shipping, payment} = cart;
-  const orderCreate = useSelector(state => state.orderCreate);
+const OrderPage = (props) => {
   const dispatch = useDispatch();
-  const {loading, success, error, order} = orderCreate;
+  const orderDetails = useSelector(state => state.orderDetails);
+  const {loading, order, error} = orderDetails;
 
-
-  if (!shipping.address || !shipping.country || !shipping.city || !shipping.postalCode) {
-    props.history.push('/shipping');
-  } else if (!payment.paymentMethod) {
-    props.history.push('/payment');
-  }
-
-  const itemsPrice = cartItems.reduce((a,c) => a + c.price * c.qty, 0);
-  const shippingPrice = itemsPrice > 100 ? 0 : 10;
-  const taxPrice = 0.18 * itemsPrice;
-  const totalPrice = itemsPrice + shippingPrice + taxPrice;
-
-  const placeOrderHandler = () => {
-    dispatch(createOrder({
-      orderItems: cartItems, shipping, payment, itemsPrice, shippingPrice, taxPrice, totalPrice}));
-  }
+  const payHandler = () => {};
 
   useEffect(() => {
-    if (success) {
-      props.history.push(`/orders/${order.id}`)
-    }
-  }, [success, order, props.history]);
+    dispatch(detailsOrder(props.match.params.id));
+  }, [])
 
   return (
+    loading ? <div>Loading...</div> : error ? <div>{error.message} </div>:
     <div>
       <CheckoutSteps step1 step2 step3 step4/>
       <div className="placeorder">
@@ -44,14 +25,20 @@ const PlaceOrderPage = (props) => {
             <h3> Shipping
             </h3>
             <div>
-              {cart.shipping.address}, {cart.shipping.city}, {cart.shipping.postalCode}, {cart.shipping.country}
+              {order.shipping.address}, {order.shipping.city}, {order.shipping.postalCode}, {order.shipping.country}
+            </div>
+            <div>
+              {order.isDelivered ? `Delivered at ${order.deliveredAt}` : `Not delivered`}
             </div>
           </div>
           <div>
             <h3> Payment
             </h3>
             <div>
-              Payment Method: {cart.payment.paymentMethod}
+              Payment Method: {order.payment.paymentMethod}
+            </div>
+            <div>
+              {order.isPaid ? `Paid at ${order.paidAt}` : `Not paid`}
             </div>
           </div>
           <div>
@@ -65,12 +52,12 @@ const PlaceOrderPage = (props) => {
                 </div>
               </li>
               {
-                cartItems.length === 0 ?
+                order.orderItems.length === 0 ?
                   <div>
                     Cart is empty
                   </div>
                   :
-                  cartItems.map(cartItem =>
+                  order.orderItems.map(cartItem =>
                     <li key={cartItem.product}>
                       <div className="cart-image">
                         <img src={cartItem.image} alt="product"/>
@@ -94,7 +81,7 @@ const PlaceOrderPage = (props) => {
         <div className="placeorder-action">
           <ul>
             <li>
-              <button  className="button primary full-width" onClick={placeOrderHandler}> Place Order </button>
+              <button  className="button primary full-width" onClick={payHandler}>Pay Now</button>
             </li>
             <li>
               <h3>
@@ -106,7 +93,7 @@ const PlaceOrderPage = (props) => {
                 Items
               </div>
               <div>
-                ${itemsPrice}
+                ${order.itemsPrice}
               </div>
             </li>
             <li>
@@ -114,7 +101,7 @@ const PlaceOrderPage = (props) => {
                 Shipping
               </div>
               <div>
-                ${shippingPrice}
+                ${order.shippingPrice}
               </div>
             </li>
             <li>
@@ -122,7 +109,7 @@ const PlaceOrderPage = (props) => {
                 Tax
               </div>
               <div>
-                ${taxPrice}
+                ${order.taxPrice}
               </div>
             </li>
             <li>
@@ -130,7 +117,7 @@ const PlaceOrderPage = (props) => {
                 Order Total
               </div>
               <div>
-                ${totalPrice}
+                ${order.totalPrice}
               </div>
             </li>
           </ul>
@@ -140,4 +127,4 @@ const PlaceOrderPage = (props) => {
   )
 }
 
-export default PlaceOrderPage;
+export default OrderPage;

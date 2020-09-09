@@ -11,14 +11,12 @@ const SigninPage = (props) => {
   const dispatch = useDispatch();
   const redirect = props.location.search ? props.location.search.split('=')[1] : '/';
 
-  console.log(redirect);
-  console.log(props.location.search);
 
   useEffect(() => {
     if(userInfo) {
       props.history.push(redirect);
     }
-  }, [userInfo]);
+  }, [props.history, redirect, userInfo]);
 
   const submitHandler = e => {
     e.preventDefault();

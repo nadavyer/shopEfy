@@ -1,8 +1,7 @@
-const express = require('express');
 const User = require('../models/userModel');
 const {getToken} = require('../utils/utils');
+const router = require('express').Router();
 
-const router = express.Router();
 
 router.post('/register', async (req, res) => {
   const user = new User({

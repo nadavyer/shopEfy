@@ -5,6 +5,7 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser');
 const userRoute = require('./routes/userRoute');
 const productRoute = require('./routes/productRoute');
+const orderRoute = require('./routes/orderRoute');
 
 
 const mongodbUrl = config.MONGODB_URL
@@ -28,6 +29,7 @@ app.use(express.static('public'));
 
 app.use('/api/users', userRoute);
 app.use('/api/products', productRoute)
+app.use('/api/orders', orderRoute)
 
 
 const port = process.env.PORT;
