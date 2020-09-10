@@ -28,11 +28,20 @@ app.use(morgan('tiny'));
 app.use(express.static('public'));
 
 app.use('/api/users', userRoute);
-app.use('/api/products', productRoute)
-app.use('/api/orders', orderRoute)
+app.use('/api/products', productRoute);
+app.use('/api/orders', orderRoute);
+app.get('/api/config/paypal', (req, res) => {
+  res.send(config.PAYPAL_CLIENT_ID);
+})
 
 
 const port = process.env.PORT;
 app.listen(5000, () => {
   console.log(`*** Server started on http://localhost:${port} ***`);
 })
+
+
+
+
+
+

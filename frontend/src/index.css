@@ -443,3 +443,7 @@ background-color: #f0f0f0;
     font-weight: bold;
     color: #c04000;
 }
+
+.placeorder-action-payment > div {
+    width: 100%;
+}
