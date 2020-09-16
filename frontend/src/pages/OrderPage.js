@@ -6,6 +6,8 @@ import PaypalButton from '../components/PaypalButton'
 
 const OrderPage = (props) => {
   const dispatch = useDispatch();
+  const orderPay = useSelector(state => state.orderPay);
+  const {loading: loadingPay, success: successPay, error: errorPay} = orderPay;
   const orderDetails = useSelector(state => state.orderDetails);
   const {loading, order, error} = orderDetails;
 
@@ -13,12 +15,13 @@ const OrderPage = (props) => {
     dispatch(payOrder(order, paymentResult))
   }
 
-  const payHandler = () => {
-  };
-
   useEffect(() => {
-    dispatch(detailsOrder(props.match.params.id));
-  }, [])
+    if (successPay) {
+      props.history.push('/profile');
+    } else {
+      dispatch(detailsOrder(props.match.params.id));
+    }
+  }, [dispatch, props.match.params.id, successPay])
 
   return (
     loading ? <div>Loading...</div> : error ? <div>{error.message} </div> :
@@ -88,7 +91,7 @@ const OrderPage = (props) => {
                 {!order.isPaid &&
                 <PaypalButton
                   amount={order.totalPrice}
-                  onSuccess={handleSuccessPayment} />
+                  onSuccess={handleSuccessPayment}/>
                 }
               </li>
               <li>

@@ -8,12 +8,10 @@ router.get('/:id', async (req, res) => {
     const order = await Order.findById(req.params.id);
     if (order) {
       res.send(order);
-    }
-    else {
+    } else {
       res.status(404).send('Order not found');
     }
-  }
-  catch (e) {
+  } catch (e) {
     res.status(400).send({message: 'Error getting order'})
   }
 });
@@ -35,6 +33,27 @@ router.post('/', isAuth, async (req, res) => {
     message: 'New Order Created',
     data: newOrderCreated
   })
+});
+
+router.put('/:id/pay', isAuth, async (req, res) => {
+  const order = await Order.findById(req.params.id);
+  if (order) {
+    order.isPaid = true;
+    order.paidAt = Date.now();
+    order.payment = {
+      paymentMethod: 'Paypal',
+      paymentResult: {
+        payerID: req.body.payerID,
+        orderID: req.body.orderID,
+        paymentID: req.body.paymentID
+      }
+    };
+
+    const updatedOrder = await order.save();
+    res.send({message: 'Order Paid', order: updatedOrder});
+  } else {
+    res.status(404).send({message: 'Order not found'});
+  }
 });
 
 module.exports = router;
