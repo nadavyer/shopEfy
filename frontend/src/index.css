@@ -368,14 +368,14 @@ th {
     text-align: left;
 }
 
-tbody>tr:nth-child(odd) {
-background-color: #f0f0f0;
+tbody > tr:nth-child(odd) {
+    background-color: #f0f0f0;
 }
 
 /* Checkout steps */
 
 .checkout-steps {
-   display: flex;
+    display: flex;
     justify-content: space-between;
     width: 40rem;
     margin: 1rem auto;
@@ -433,13 +433,13 @@ background-color: #f0f0f0;
 }
 
 .placeorder-action > ul > li {
-     display: flex;
-     justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 1rem;
- }
+}
 
 .placeorder-action > ul > li:last-child {
- font-size: 2rem;
+    font-size: 2rem;
     font-weight: bold;
     color: #c04000;
 }

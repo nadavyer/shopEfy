@@ -63,4 +63,9 @@ const productsDeleteReducer = (state = {product: {}}, action) => {
 }
 
 
-export {productListReducer, productDetailsReducer, productsSaveReducer, productsDeleteReducer}
+export {
+  productListReducer,
+  productDetailsReducer,
+  productsSaveReducer,
+  productsDeleteReducer
+}

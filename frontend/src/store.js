@@ -1,10 +1,20 @@
 import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
-import {productDetailsReducer, productListReducer, productsSaveReducer} from './reducers/productReducer';
+import {
+  productDetailsReducer,
+  productListReducer,
+  productsSaveReducer
+} from './reducers/productReducer';
 import {cartReducer} from './reducers/cartReducer';
 import {userSigninReducer, userUpdateReducer} from './reducers/userReducer'
 import {userRegisterReducer} from './reducers/userReducer'
 import {productsDeleteReducer} from './reducers/productReducer'
-import {myOrderListReducer, orderCreateReducer, orderDetailsReducer, orderPayReducer} from './reducers/orderReducer'
+import {
+  myOrderListReducer,
+  orderCreateReducer, orderDeleteReducer,
+  orderDetailsReducer,
+  orderListReducer,
+  orderPayReducer
+} from './reducers/orderReducer'
 import thunk from 'redux-thunk';
 import cookie from 'js-cookie';
 
@@ -24,7 +34,9 @@ const reducer = combineReducers({
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
-  myOrderList: myOrderListReducer
+  myOrderList: myOrderListReducer,
+  orderList: orderListReducer,
+  orderDelete: orderDeleteReducer
 })
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, initialState, composeEnhancer(applyMiddleware(thunk)));

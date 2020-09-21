@@ -153,12 +153,12 @@ const ProductsPage = (props) => {
           <tbody>
           {products.map(product =>
             <tr key={product.id}>
-              <th>{product.id}</th>
-              <th>{product.name}</th>
-              <th>{product.price}</th>
-              <th>{product.category}</th>
-              <th>{product.brand}</th>
-              <th>
+              <td>{product.id}</td>
+              <td>{product.name}</td>
+              <td>{product.price}</td>
+              <td>{product.category}</td>
+              <td>{product.brand}</td>
+              <td>
                 <button className="button" onClick={() => openModal(product)}>
                   Edit
                 </button>
@@ -166,7 +166,7 @@ const ProductsPage = (props) => {
                 <button className="button" onClick={() => deleteHandler(product)}>
                   Delete
                 </button>
-              </th>
+              </td>
             </tr>
           )}
           </tbody>

@@ -46,4 +46,8 @@ const userRegisterReducer = (state = {}, action) => {
   }
 }
 
-export  {userSigninReducer, userRegisterReducer, userUpdateReducer}
+export {
+  userSigninReducer,
+  userRegisterReducer,
+  userUpdateReducer
+}
