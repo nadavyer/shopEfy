@@ -31,9 +31,9 @@ const PlaceOrderPage = (props) => {
 
   useEffect(() => {
     if (success) {
-      props.history.push(`/orders/${order.id}`)
+      props.history.push(`/order/${order.id}`)
     }
-  }, [success, order, props.history]);
+  }, [success, props.history]);
 
   return (
     <div>

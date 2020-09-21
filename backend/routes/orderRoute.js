@@ -2,6 +2,10 @@ const router = require('express').Router();
 const Order = require('../models/orderModel');
 const {isAuth} = require('../utils/utils');
 
+router.get('/mine',isAuth,  async (req, res) => {
+  const orders = await Order.find({user: req.user.id});
+  res.send(orders);
+})
 
 router.get('/:id', async (req, res) => {
   try {
@@ -15,6 +19,7 @@ router.get('/:id', async (req, res) => {
     res.status(400).send({message: 'Error getting order'})
   }
 });
+
 
 router.post('/', isAuth, async (req, res) => {
   const newOrder = new Order({

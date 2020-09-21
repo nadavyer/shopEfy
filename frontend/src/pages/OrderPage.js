@@ -21,7 +21,7 @@ const OrderPage = (props) => {
     } else {
       dispatch(detailsOrder(props.match.params.id));
     }
-  }, [dispatch, props.match.params.id, successPay])
+  }, [successPay, dispatch, props.match.params.id, props.history])
 
   return (
     loading ? <div>Loading...</div> : error ? <div>{error.message} </div> :

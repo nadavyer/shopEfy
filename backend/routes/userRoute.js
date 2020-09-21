@@ -43,6 +43,27 @@ router.post('/signin', async (req, res) => {
   }
 })
 
+router.put('/:id', async (req, res) => {
+  const id = req.params.id;
+  const user = await User.findById(id);
+
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.password = req.body.password || user.password;
+    const updatedUser = await user.save();
+    res.send({
+      id: updatedUser.id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+      token: getToken(updatedUser)
+    });
+  } else {
+    res.status(404).send({msg: 'User Not Found'});
+  }
+})
+
 router.get('/createadmin', async (req, res) => {
   try {
     const user = new User({
