@@ -37,7 +37,7 @@ const deleteOrder = orderId => async (dispatch, getState) => {
   try {
     dispatch({type: ORDER_DELETE_REQUEST, payload: orderId});
     const {userSignin: {userInfo}} = getState();
-    const {data: {data: data}} = await axios.delete(`/api/order/${orderId}`, {
+    const {data: {data: data}} = await axios.delete(`/api/orders/${orderId}`, {
       headers: {Authorization: `Bearer ${userInfo.token}`}
     });
     dispatch({type: ORDER_DELETE_SUCCESS, payload: data})

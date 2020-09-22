@@ -50,17 +50,15 @@ const ProductsPage = (props) => {
 
 
   return (
-    <div>
-      <div className="content content-margined">
-        <div className="product-header">
-          <h3>
-            Products
-          </h3>
-          {!modalVisible &&
-          <button className="button primary" onClick={() => openModal({})}>
-            Create product
-          </button>}
-        </div>
+    <div className="content content-margined">
+      <div className="product-header">
+        <h3>
+          Products
+        </h3>
+        {!modalVisible &&
+        <button className="button primary" onClick={() => openModal({})}>
+          Create product
+        </button>}
       </div>
       {
         modalVisible &&
@@ -85,35 +83,40 @@ const ProductsPage = (props) => {
                 <label htmlFor="price">
                   Price
                 </label>
-                <input type="text" name="price" id="price" value={price || ''} onChange={(e) => setPrice(e.target.value)}>
+                <input type="text" name="price" id="price" value={price || ''}
+                       onChange={(e) => setPrice(e.target.value)}>
                 </input>
               </li>
               <li>
                 <label htmlFor="image">
                   Image
                 </label>
-                <input type="text" name="image" id="image" value={image || ''} onChange={(e) => setImage(e.target.value)}>
+                <input type="text" name="image" id="image" value={image || ''}
+                       onChange={(e) => setImage(e.target.value)}>
                 </input>
               </li>
               <li>
                 <label htmlFor="brand">
                   Brand
                 </label>
-                <input type="text" name="brand" id="brand" value={brand || ''} onChange={(e) => setBrand(e.target.value)}>
+                <input type="text" name="brand" id="brand" value={brand || ''}
+                       onChange={(e) => setBrand(e.target.value)}>
                 </input>
               </li>
               <li>
                 <label htmlFor="category">
                   Category
                 </label>
-                <input type="text" name="category" id="category" value={category || ''} onChange={(e) => setCategory(e.target.value)}>
+                <input type="text" name="category" id="category" value={category || ''}
+                       onChange={(e) => setCategory(e.target.value)}>
                 </input>
               </li>
               <li>
                 <label htmlFor="description">
                   Description
                 </label>
-                <input type="text" name="description" id="description" value={description || ''} onChange={(e) => setDescription(e.target.value)}>
+                <input type="text" name="description" id="description" value={description || ''}
+                       onChange={(e) => setDescription(e.target.value)}>
                 </input>
               </li>
               <li>

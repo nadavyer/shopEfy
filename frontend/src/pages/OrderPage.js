@@ -29,7 +29,8 @@ const OrderPage = (props) => {
         <div className="placeorder">
           <div className="placeorder-info">
             <div>
-              <h3> Shipping
+              <h3>
+                Shipping
               </h3>
               <div>
                 {order.shipping.address}, {order.shipping.city}, {order.shipping.postalCode}, {order.shipping.country}
